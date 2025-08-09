@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Foundation\MaintenanceMode;
+use Illuminate\Foundation\FileBasedMaintenanceMode;
+
+class AppServiceProvider extends ServiceProvider
+{
+    public function register(): void
+    {
+        $this->app->singleton(MaintenanceMode::class, function () {
+            return new FileBasedMaintenanceMode(storage_path('framework/down'));
+        });
+    }
+
+    public function boot(): void
+    {
+        //
+    }
+}
